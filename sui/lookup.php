@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta name="description" content="A cool website where we do stuff and bypass parental controls.">
+  <meta charset="UTF-8">
+<title>Scratch User ID Lookup</title>
+<link rel="icon" type="image/x-icon" href="ICON.png">
+<link rel="stylesheet" href="/common/css/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<center>
+<h1>Scratch User ID Lookup</h1>
+<a href="/"><img src="/common/HOME.png"></a></br>
+<marquee direction="right"><big><b>More outdated every day!</b></big></marquee>
+<hr>
+<h2>Query Results</h2>
+<?php 
+
+$start=time();
+$json = file_get_contents('data/' . $_GET["user"][0] . '.json'); 
+
+if ($json === false) {
+    die('Query failed: no data.');
+}
+
+$json_data = json_decode($json, true); 
+
+if ($json_data === null) {
+    die('Query failed: bad data.');
+}
+
+echo 'Username: ' . $_GET["user"] . '<br>';
+echo 'User ID: ' . (int)$json_data[$_GET["user"]] . '<br>';
+echo 'Took ' . microtime(true) - $_SERVER['REQUEST_TIME'] . " seconds.";
+
+echo '<hr><h2>Appendix</h2>';
+echo '<a download class="default-size" href="data/' . htmlspecialchars($_GET["user"][0]) . '.json">Relevant data dump (JSON)</a>';
+?>
+<br><a href="." class="default-size">Try another username</a>
+
+
+</center>
+
+</body>
+</html>
