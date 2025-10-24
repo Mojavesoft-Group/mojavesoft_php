@@ -13,7 +13,6 @@
     <hr>
     <video controls playsinline disablepictureinpicture width=40%>
     <?php
-    header("");
     echo '<source src="video/' . htmlspecialchars($_GET["video"]) . '" type="video/mp4"/>';
     ?>
 
