@@ -16,23 +16,36 @@
 <marquee direction="right"><big><b>More outdated every day!</b></big></marquee>
 <hr>
 <h2>Query Results</h2>
-<?php 
+<?php
+/*
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+*/
+ini_set('memory_limit','390M');
 
 $start=time();
 $json = file_get_contents('id_data/' . $_GET["id"][0] . '.json'); 
 
-if ($json === false) {
+if (!$json) {
     die('Query failed: no data.');
 }
 
 $json_data = json_decode($json, true); 
 
-if ($json_data === null) {
+if (!$json_data) {
     die('Query failed: bad data.');
 }
 
 echo 'User ID: ' . $_GET["id"] . '<br>';
-echo 'Username: ' . $json_data[$_GET["id"]] . '<br>';
+
+if (isset($json_data[$_GET["id"]])) {
+  echo 'Username: ' . $json_data[$_GET["id"]] . '<br>';
+}
+
+else {
+  echo 'No username information found.<br>';
+}
+
 echo 'Took ' . microtime(true) - $_SERVER['REQUEST_TIME'] . " seconds.";
 
 echo '<hr><h2>Appendix</h2>';
