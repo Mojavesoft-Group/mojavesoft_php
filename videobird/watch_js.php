@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VideoBird: Stream chicken footage for free!</title>
+<title>VideoBird</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <center>
